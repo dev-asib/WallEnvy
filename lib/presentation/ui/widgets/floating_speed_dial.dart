@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:simple_speed_dial/simple_speed_dial.dart';
 import 'package:wall_envy/presentation/state_holders/controllers/details_screen_controller.dart';
+import 'package:simple_speed_dial/simple_speed_dial.dart';
 
 class FloatingSpeedDial extends StatelessWidget {
   const FloatingSpeedDial({
@@ -14,7 +14,7 @@ class FloatingSpeedDial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DetailsScreenController detailsScreenController =
-    Get.put(DetailsScreenController());
+        Get.put(DetailsScreenController());
     return SpeedDial(
       openBackgroundColor: Colors.deepPurple,
       closedBackgroundColor: Colors.deepPurple,
@@ -22,29 +22,31 @@ class FloatingSpeedDial extends StatelessWidget {
       closedForegroundColor: Colors.white,
       labelsBackgroundColor: Colors.deepPurple,
       labelsStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
       speedDialChildren: <SpeedDialChild>[
         buildSpeedDialChild(
           icon: Icons.share,
           labelText: "Share",
-          onTap:()=> detailsScreenController.shareWallpaper(wallpaperUrl),
+          onTap: () => detailsScreenController.shareWallpaper(wallpaperUrl),
         ),
         buildSpeedDialChild(
           icon: Icons.download,
           labelText: "Download",
-          onTap:()=> detailsScreenController.downloadWallpaper(wallpaperUrl),
+          onTap: () => detailsScreenController.downloadWallpaper(wallpaperUrl),
         ),
         buildSpeedDialChild(
           icon: Icons.home,
           labelText: "Set Home",
-          onTap: ()=> detailsScreenController.setWallPaperHomeScreen(wallpaperUrl),
+          onTap: () =>
+              detailsScreenController.setWallPaperHomeScreen(wallpaperUrl),
         ),
         buildSpeedDialChild(
           icon: Icons.lock,
           labelText: "Lock Screen",
-          onTap:()=> detailsScreenController.setWallPaperLockScreen(wallpaperUrl),
+          onTap: () =>
+              detailsScreenController.setWallPaperLockScreen(wallpaperUrl),
         ),
       ],
       child: const Icon(

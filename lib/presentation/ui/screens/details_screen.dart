@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wall_envy/presentation/state_holders/controllers/connectivity_controller.dart';
 import 'package:wall_envy/presentation/ui/widgets/floating_speed_dial.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -7,7 +8,10 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, String>? arguments = Get.arguments as Map<String, String>?;
+    final ConnectivityController connectivityController = Get.find();
+
+    final Map<String, String>? arguments =
+        Get.arguments as Map<String, String>?;
     final String wallpaperUrl = arguments?['wallpaperUrl'] ?? '';
     final String tag = arguments?['tag'] ?? '';
 

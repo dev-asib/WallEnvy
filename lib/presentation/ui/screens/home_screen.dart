@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wall_envy/presentation/state_holders/controllers/connectivity_controller.dart';
 import 'package:wall_envy/presentation/state_holders/controllers/home_screen_controller.dart';
 import 'package:wall_envy/presentation/ui/widgets/app_bar.dart';
 import 'package:wall_envy/presentation/ui/widgets/wallpaper_card.dart';
@@ -14,6 +15,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final ConnectivityController connectivityController = Get.find();
+
     return Scaffold(
       appBar: buildAppBar("WallEnvy"),
       body: GetBuilder<HomeScreenController>(

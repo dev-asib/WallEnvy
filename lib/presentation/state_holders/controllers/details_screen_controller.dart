@@ -7,49 +7,64 @@ import 'package:share_plus/share_plus.dart';
 import 'package:wall_envy/presentation/ui/widgets/toast_message.dart';
 
 class DetailsScreenController extends GetxController {
+  RxDouble progress = 0.0.obs;
 
-  shareWallpaper(wallpaperUrl) {
-    Share.share(wallpaperUrl);
+  void shareWallpaper(String wallpaperUrl) {
+    try {
+      Share.share(wallpaperUrl);
+    } catch (e) {
+      debugPrint("Share Error: $e");
+      toastMessage("Failed to share wallpaper.");
+    }
   }
 
-  downloadWallpaper(wallpaperUrl) async {
+  Future<void> downloadWallpaper(String wallpaperUrl) async {
     try {
       await FileDownloader.downloadFile(
         url: wallpaperUrl,
-        onDownloadCompleted: (value) {
-          toastMessage("Wallpaper Download Success.\npath: $value");
-          update();
+        onProgress: (name, progress) {
+          debugPrint("Name: $name");
+          this.progress.value = progress;
+          debugPrint("Download Progress: $progress");
         },
-        onDownloadError: (value) {
-          toastMessage("Something is wrong.");
-
+        onDownloadCompleted: (path) {
+          toastMessage("Wallpaper Download Success.\npath: $path");
+          progress.value = 0.0;
+        },
+        onDownloadError: (error) {
+          debugPrint("Download Error: $error");
+          progress.value = 0.0;
+          toastMessage("Download failed. Please try again.");
         },
       );
     } catch (e) {
       debugPrint("Download Error: $e");
-      toastMessage("Download Failed.");
+      toastMessage("Download Failed. An excepted error occurred.");
+      progress.value = 0.0;
     }
   }
 
-  setWallPaperHomeScreen(wallpaperUrl) async {
+  Future<void> setWallPaperHomeScreen(String wallpaperUrl) async {
     try {
       int location = WallpaperManager.HOME_SCREEN;
       var file = await DefaultCacheManager().getSingleFile(wallpaperUrl);
       await WallpaperManager.setWallpaperFromFile(file.path, location);
-      toastMessage("Set Successfully");
+      toastMessage("Wallpaper set successfully on home screen.");
     } catch (e) {
-      toastMessage("Failed");
+      debugPrint("Set Wallpaper Home Screen Error: $e");
+      toastMessage("Failed to set wallpaper on home screen.");
     }
   }
 
-  setWallPaperLockScreen(wallpaperUrl) async {
+  Future<void> setWallPaperLockScreen(String wallpaperUrl) async {
     try {
       int location = WallpaperManager.LOCK_SCREEN;
       var file = await DefaultCacheManager().getSingleFile(wallpaperUrl);
       await WallpaperManager.setWallpaperFromFile(file.path, location);
-      toastMessage("Set Successfully");
+      toastMessage("Wallpaper set successfully on lock screen.");
     } catch (e) {
-      toastMessage("Failed");
+      debugPrint("Set Wallpaper Lock Screen Error: $e");
+      toastMessage("Failed to set wallpaper on lock screen.");
     }
   }
 }

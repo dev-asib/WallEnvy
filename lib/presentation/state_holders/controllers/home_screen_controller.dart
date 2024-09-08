@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wall_envy/data/entities/wallpapers.dart';
 
@@ -9,20 +10,31 @@ class HomeScreenController extends GetxController {
   List<Wallpapers> get wallpapers => _wallpapers;
 
   Future<void> _fetchWallpapers() async {
-    _firebaseFirestore.collection("wallpapers").snapshots().listen(
-      (snapshot) {
-        _wallpapers.clear();
-        for (QueryDocumentSnapshot doc in snapshot.docs) {
-          _wallpapers.add(
-            Wallpapers(
-              wallpaperID: doc.id,
-              wallpaperUrl: doc.get('imgUrl'),
-            ),
-          );
-        }
-        update();
-      },
-    );
+    try {
+      _firebaseFirestore.collection("wallpapers").snapshots().listen(
+        (snapshot) {
+          _wallpapers.clear();
+          for (QueryDocumentSnapshot doc in snapshot.docs) {
+            try {
+              _wallpapers.add(
+                Wallpapers(
+                  wallpaperID: doc.id,
+                  wallpaperUrl: doc.get('imgUrl'),
+                ),
+              );
+            } catch (e) {
+              debugPrint("Error processing document ${doc.id}: $e");
+            }
+          }
+          update();
+        },
+        onError: (error) {
+          debugPrint("Error fetching wallpapers: $error");
+        },
+      );
+    } catch (e) {
+      debugPrint("Error initializing wallpaper fetch: $e");
+    }
   }
 
   @override
