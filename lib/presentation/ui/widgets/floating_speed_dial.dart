@@ -50,7 +50,7 @@ class FloatingSpeedDial extends StatelessWidget {
         ),
       ],
       child: const Icon(
-        Icons.add_outlined,
+        Icons.settings,
         size: 40,
       ),
     );
