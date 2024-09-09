@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wall_envy/app/routes/routes_name.dart';
 import 'package:wall_envy/data/entities/wallpapers.dart';
+import 'package:wall_envy/presentation/ui/widgets/cached_network_image_widget.dart';
 
 class WallpaperCard extends StatelessWidget {
   const WallpaperCard({
@@ -22,15 +23,8 @@ class WallpaperCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(
-                image: NetworkImage(wallpapers.wallpaperUrl),
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
+          child:
+              CachedNetworkImageWidget(wallpaperUrl: wallpapers.wallpaperUrl),
         ),
       ),
     );

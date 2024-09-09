@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wall_envy/presentation/state_holders/controllers/connectivity_controller.dart';
+import 'package:wall_envy/presentation/ui/widgets/cached_network_image_widget.dart';
 import 'package:wall_envy/presentation/ui/widgets/floating_speed_dial.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -27,17 +28,7 @@ class DetailsScreen extends StatelessWidget {
         Center(
           child: Hero(
             tag: tag,
-            child: Container(
-              height: double.maxFinite,
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(wallpaperUrl),
-                  fit: BoxFit.fill,
-                  onError: (_, __) => const Icon(Icons.error),
-                ),
-              ),
-            ),
+            child: CachedNetworkImageWidget(wallpaperUrl: wallpaperUrl),
           ),
         ),
         Positioned(

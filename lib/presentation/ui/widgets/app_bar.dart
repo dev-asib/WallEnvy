@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wall_envy/presentation/ui/utils/app_string.dart';
 
-AppBar buildAppBar(String appBarTitle) {
+AppBar buildAppBar() {
   return AppBar(
-    title: Text(appBarTitle),
+    title: const Text(AppString.appName),
   );
 }

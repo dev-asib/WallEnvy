@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final ConnectivityController connectivityController = Get.find();
 
     return Scaffold(
-      appBar: buildAppBar("WallEnvy"),
+      appBar: buildAppBar(),
       body: GetBuilder<HomeScreenController>(
         init: HomeScreenController(),
         builder: (homeScreenController) {

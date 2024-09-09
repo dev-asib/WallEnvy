@@ -14,6 +14,12 @@ class AppThemes {
           fontWeight: FontWeight.bold,
         ),
       ),
+      textTheme: const TextTheme(
+        titleLarge: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

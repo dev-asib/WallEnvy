@@ -16,12 +16,17 @@ class HomeScreenController extends GetxController {
           _wallpapers.clear();
           for (QueryDocumentSnapshot doc in snapshot.docs) {
             try {
-              _wallpapers.add(
-                Wallpapers(
-                  wallpaperID: doc.id,
-                  wallpaperUrl: doc.get('imgUrl'),
-                ),
-              );
+              final imgUrl = doc.get('imgUrl') as String?;
+              if (imgUrl != null) {
+                _wallpapers.add(
+                  Wallpapers(
+                    wallpaperID: doc.id,
+                    wallpaperUrl: imgUrl,
+                  ),
+                );
+              } else {
+                debugPrint("imgUrl is null for document ${doc.id}");
+              }
             } catch (e) {
               debugPrint("Error processing document ${doc.id}: $e");
             }
