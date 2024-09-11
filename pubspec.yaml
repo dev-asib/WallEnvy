@@ -20,12 +20,12 @@ dependencies:
   simple_speed_dial: ^0.1.7
   flutter_wallpaper_manager: ^0.0.4
   flutter_cache_manager: ^3.4.1
-  share_plus: ^9.0.0
+  share_plus: ^10.0.2
   flutter_file_downloader: ^2.0.0
   get: ^4.6.6
   internet_connection_checker: ^2.0.0
-  connectivity_plus: ^6.0.3
-  cached_network_image: ^3.4.0
+  connectivity_plus: ^6.0.5
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
